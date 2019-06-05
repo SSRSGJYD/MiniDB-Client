@@ -13,10 +13,13 @@
     <url>http://maven.apache.org</url>
 
     <properties>
+        <exec.mainClass>application.ClientDialog</exec.mainClass>
+        <javafx.runtime.lib.jar>${java.home}/jre/lib/ext/jfxrt.jar</javafx.runtime.lib.jar>
+        <javafx.tools.ant.jar>${java.home}/lib/ant-javafx.jar</javafx.tools.ant.jar>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.compilerVersion>11</maven.compiler.compilerVersion>
     </properties>
 
     <build>
@@ -67,12 +70,13 @@
                 </executions>
             </plugin>
 
-
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>1.2.1</version>
+                <version>1.4</version>
+                <configuration>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -80,6 +84,16 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
@@ -90,6 +104,48 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>l4j-clui</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>gui</headerType>
+                            <jar>${project.build.directory}/Client.jar</jar>
+                            <outfile>${project.build.directory}/Client.exe</outfile>
+                            <downloadUrl>http://java.com/download</downloadUrl>
+                            <classPath>
+                                <mainClass>application.ClientDialog</mainClass>
+                                <preCp>anything</preCp>
+                            </classPath>
+                            <!--<icon>src/resources/0.ico</icon>-->
+                            <jre>
+                                <minVersion>11.0.1</minVersion>
+                                <jdkPreference>preferJre</jdkPreference>
+                            </jre>
+                            <versionInfo>
+                                <fileVersion>1.0.0.0</fileVersion>
+                                <txtFileVersion>${project.version}</txtFileVersion>
+                                <fileDescription>${project.name}</fileDescription>
+                                <copyright>2019 MiniDB</copyright>
+                                <productVersion>1.0.0.0</productVersion>
+                                <txtProductVersion>1.0.0.0</txtProductVersion>
+                                <productName>${project.name}</productName>
+                                <companyName>MiniDB</companyName>
+                                <internalName>MiniDB</internalName>
+                                <originalFilename>Client.exe</originalFilename>
+                            </versionInfo>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -109,9 +165,24 @@
             <artifactId>javafx-swing</artifactId>
             <version>13-ea+8</version>
         </dependency>
-
-
-
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics </artifactId>
+            <version>11</version>
+            <classifier>win</classifier>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.openjfx</groupId>-->
+            <!--<artifactId>javafx-graphics </artifactId>-->
+            <!--<version>11</version>-->
+            <!--<classifier>linux</classifier>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.openjfx</groupId>-->
+            <!--<artifactId>javafx-graphics </artifactId>-->
+            <!--<version>11</version>-->
+            <!--<classifier>mac</classifier>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -135,13 +206,13 @@
             <version>1.2.58</version>
         </dependency>
 
-        <dependency>
-            <groupId>javafx</groupId>
-            <artifactId>javafx-rt</artifactId>
-            <version>2.1</version>
-            <scope>system</scope>
-            <systemPath>C:/Program Files/Java/jre1.8.0_191/lib/ext/jfxrt.jar</systemPath>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>javafx</groupId>-->
+            <!--<artifactId>javafx-rt</artifactId>-->
+            <!--<version>2.1</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>C:/Program Files/Java/jre1.8.0_191/lib/ext/jfxrt.jar</systemPath>-->
+        <!--</dependency>-->
 
     </dependencies>
 
