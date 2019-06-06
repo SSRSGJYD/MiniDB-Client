@@ -216,7 +216,7 @@ public class SceneController {
 	
 	public void execute() {
 		final String sql = textArea.getText();
-		doExecute(sql, "single");
+		doExecute(sql, "multi");
 	}
 	
 	public void importExecute() {
