@@ -14,8 +14,10 @@
 
     <properties>
         <exec.mainClass>application.ClientDialog</exec.mainClass>
-        <javafx.runtime.lib.jar>/usr/lib/jvm/java-8-openjdk/jre/lib/ext/jfxrt.jar</javafx.runtime.lib.jar>
-        <javafx.tools.ant.jar>/usr/lib/jvm/java-8-openjdk/lib/ant-javafx.jar</javafx.tools.ant.jar>
+        <javafx.runtime.lib.jar>./jfxrt.jar</javafx.runtime.lib.jar>
+        <!-- <javafx.runtime.lib.jar>/usr/lib/jvm/java-8-openjdk/jre/lib/ext/jfxrt.jar</javafx.runtime.lib.jar> -->
+        <!-- <javafx.tools.ant.jar>/usr/lib/jvm/java-8-openjdk/lib/ant-javafx.jar</javafx.tools.ant.jar> -->
+        <javafx.tools.ant.jar>./ant-javafx.jar</javafx.tools.ant.jar>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -178,7 +180,7 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics </artifactId>
             <version>11</version>
-            <classifier>win</classifier>
+            <classifier>linux</classifier>
         </dependency>
         <!--<dependency>-->
             <!--<groupId>org.openjfx</groupId>-->

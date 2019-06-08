@@ -304,7 +304,10 @@ public class SceneController {
 												Map<String, String> map = new HashMap<>();
 												int i = 0;
 												for(Object attribute:attributeArr) {
-													map.put((String)attribute,((JSONObject)row).get((String)attribute).toString());
+                            if(((JSONObject)row).get((String)attribute)==null)
+                                map.put((String)attribute,"null");
+                            else
+                                map.put((String)attribute,((JSONObject)row).get((String)attribute).toString());
 												}
 												data.add(map);
 											}
