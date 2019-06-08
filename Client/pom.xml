@@ -14,12 +14,12 @@
 
     <properties>
         <exec.mainClass>application.ClientDialog</exec.mainClass>
-        <javafx.runtime.lib.jar>${java.home}/jre/lib/ext/jfxrt.jar</javafx.runtime.lib.jar>
-        <javafx.tools.ant.jar>${java.home}/lib/ant-javafx.jar</javafx.tools.ant.jar>
+        <javafx.runtime.lib.jar>C:/program files/Java/jdk1.8.0_202/jre/lib/ext/jfxrt.jar</javafx.runtime.lib.jar>
+        <javafx.tools.ant.jar>C:/program files/Java/jdk1.8.0_202/ant-javafx.jar</javafx.tools.ant.jar>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <maven.compiler.compilerVersion>11</maven.compiler.compilerVersion>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.compilerVersion>8</maven.compiler.compilerVersion>
     </properties>
 
     <build>
@@ -32,6 +32,16 @@
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.zenjava</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>8.8.3</version>
+                <configuration>
+                    <vendor>minidb</vendor>
+                    <mainClass>application.ClientDialog</mainClass>
                 </configuration>
             </plugin>
 
@@ -75,6 +85,8 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>1.4</version>
                 <configuration>
+                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                    <shadedClassifierName>shaded</shadedClassifierName>
                     <createDependencyReducedPom>false</createDependencyReducedPom>
                 </configuration>
                 <executions>
@@ -124,9 +136,9 @@
                                 <mainClass>application.ClientDialog</mainClass>
                                 <preCp>anything</preCp>
                             </classPath>
-                            <!--<icon>src/resources/0.ico</icon>-->
+                            <!--<icon>src/main/resources/icon.jpg</icon>-->
                             <jre>
-                                <minVersion>11.0.1</minVersion>
+                                <minVersion>1.8.0</minVersion>
                                 <jdkPreference>preferJre</jdkPreference>
                             </jre>
                             <versionInfo>
